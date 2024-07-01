@@ -33,7 +33,7 @@ class Account:
             history_message = HistoryMessages.deposit("failure", amount, self.balance)
     
         self.write_to_history(history_message)
-        
+
         # TODO:
         # implement the deposit process with all necessary checks
         # amount must be a integer greater than 0
@@ -49,7 +49,22 @@ class Account:
         # self.write_to_history(history_message)
 
     def debit(self, amount):
-        pass
+        try:
+            if float(amount) > 0 and float(amount) <= self.get_balance():
+                self.balance -= float(amount)
+
+                history_message = HistoryMessages.debit("success", amount, self.balance)
+            else:
+                print("Invalid amount for debit!")
+
+                history_message = HistoryMessages.debit("failure", amount, self.balance)
+        except Exception as e:
+            print("Invalid amount for debit!")
+
+            history_message = HistoryMessages.debit("failure", amount, self.balance)
+
+        self.write_to_history(history_message)
+        
         # TODO:
         # implement account debits with all necessary checks
         # amount must be a integer greater than 0
