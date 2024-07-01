@@ -2,7 +2,11 @@ import json
 
 class FileManager:
     def load_data(self, filename):
-        pass
+        with open(filename, 'r') as file:
+            text = file.read()
+
+            return text
+        
         # TODO:
         # Implement a process that reads the contents of the `filename` file 
         # and returns the text.
