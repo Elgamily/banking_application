@@ -28,7 +28,36 @@ class CurrencyExchange:
         # and returns the resulting dictionary.
     
     def exchange_currency(self, currency_from, currency_to, amount):
-        pass
+        try:
+            if float(amount) > 0:
+                resulting_dictionary = self.get_exchange_rates()
+
+                exchange_failed = True
+
+                if currency_from in resulting_dictionary and currency_to in resulting_dictionary:
+                    converted_amount = float(amount) * resulting_dictionary[currency_to] / resulting_dictionary[currency_from]
+                    exchange_failed = False
+
+                if exchange_failed == True:
+                    print("Currency exchange failed!")
+
+                    history_message = HistoryMessages.exchange("failure", amount, None, currency_from, currency_to)
+                else:
+                    history_message = HistoryMessages.exchange("success", amount, converted_amount, currency_from, currency_to)
+
+                    self.write_to_history(history_message)
+                    
+                    return converted_amount
+            else:
+                print("Currency exchange failed!")
+
+                history_message = HistoryMessages.exchange("failure", amount, None, currency_from, currency_to)
+        except Exception as e:
+            print("Currency exchange failed!")
+
+            history_message = HistoryMessages.exchange("failure", amount, None, currency_from, currency_to)
+
+        self.write_to_history(history_message)
 
         # implement a process that transfers the specified amount from currency `currency_from` 
         # to currency `currency_to` and, if positive, returns the amount in the new currency
