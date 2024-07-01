@@ -64,7 +64,7 @@ class Account:
             history_message = HistoryMessages.debit("failure", amount, self.balance)
 
         self.write_to_history(history_message)
-        
+
         # TODO:
         # implement account debits with all necessary checks
         # amount must be a integer greater than 0
@@ -91,7 +91,11 @@ class Account:
         
 
     def get_history(self):
-        pass
+        list_of_dicts = self.file_manager.read_json(self.hist_file_path)
+
+        for dictionary in list_of_dicts:
+            print(self.dict_to_string(dictionary))
+            
         # TODO:
         # implement a process that returns transaction history line by line
         # use the dict_to_string method to create a string from a dictionary
