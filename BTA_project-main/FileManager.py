@@ -14,12 +14,15 @@ class FileManager:
     def save_data(self, filename, data):
         with open(filename, 'w') as file:
             file.write(data)
-            
+
         # TODO:
         # Implement a process that writes the contents of `data` to the file `filename`
 
     def read_json(self, json_file_path):
-        pass
+        with open(json_file_path, 'r') as file:
+            list_of_dicts = json.load(file)
+
+            return list_of_dicts
         # TODO:
         # Implement a process that reads the contents of a file whose path is stored in the `json_file_path` variable 
         # and returns a list of dictionaries
