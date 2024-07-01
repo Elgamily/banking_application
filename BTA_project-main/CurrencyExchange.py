@@ -9,7 +9,7 @@ class CurrencyExchange:
 
     def write_to_history(self, hist_dict):
         self.file_manager.add_to_json(hist_dict, self.hist_file_path)
-         
+
         # TODO:
         # Comment and refine the code below so that the dictionary 
         # from hist_dict is added to hist.json
@@ -17,7 +17,13 @@ class CurrencyExchange:
         # self.file_manager 
 
     def get_exchange_rates(self):
-        pass
+        url = "https://fake-api.apps.berlintech.ai/api/currency_exchange"
+        response = requests.get(url)
+        
+        resulting_dictionary = json.loads(response.text)
+
+        return resulting_dictionary
+    
         # Implement a process that sends a get request to the link 
         # and returns the resulting dictionary.
     
