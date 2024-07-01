@@ -10,7 +10,7 @@ class Account:
 
     def write_to_history(self, hist_dict):
         self.file_manager.add_to_json(hist_dict, self.hist_file_path)
-         
+
         # TODO:
         # Comment and refine the code below so that the dictionary 
         # from hist_dict is added to hist.json
@@ -18,7 +18,22 @@ class Account:
         # self.file_manager 
 
     def deposit(self, amount):
-        pass
+        try:
+            if float(amount) > 0:
+                self.balance += float(amount)
+
+                history_message = HistoryMessages.deposit("success", amount, self.balance)
+            else:
+                print("Invalid amount for deposit!")
+
+                history_message = HistoryMessages.deposit("failure", amount, self.balance)
+        except Exception as e:
+            print("Invalid amount for deposit!")
+
+            history_message = HistoryMessages.deposit("failure", amount, self.balance)
+    
+        self.write_to_history(history_message)
+        
         # TODO:
         # implement the deposit process with all necessary checks
         # amount must be a integer greater than 0
