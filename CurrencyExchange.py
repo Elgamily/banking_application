@@ -1,5 +1,7 @@
 from FileManager import FileManager
 from HistoryMessages import HistoryMessages
+import requests
+import json
 
 class CurrencyExchange:
     def __init__(self, balance = 0):
